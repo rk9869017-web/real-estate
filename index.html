@@ -794,7 +794,6 @@
     </div>
 
     <div class="properties-grid">
-      <!-- Property 1 -->
       <div class="property-card">
         <div class="property-img property-img-1">
           <span class="property-badge">New Launch</span>
@@ -811,7 +810,6 @@
         </div>
       </div>
 
-      <!-- Property 2 -->
       <div class="property-card">
         <div class="property-img property-img-2">
           <span class="property-badge">Premium</span>
@@ -828,7 +826,6 @@
         </div>
       </div>
 
-      <!-- Property 3 -->
       <div class="property-card">
         <div class="property-img property-img-3">
           <span class="property-badge">Hot Deal</span>
@@ -885,7 +882,7 @@
     <p>© 2025 PrimeEstates Realty. All rights reserved. | RERA Registered</p>
   </footer>
 
-  <!-- ===== FORM SCRIPT (Google Sheets Connected) ===== -->
+  <!-- ===== FORM SCRIPT (Google Sheets Connected — 2 Sheets) ===== -->
   <script>
     // ✅ Aapka Google Apps Script Web App URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcK77Q6Kwq7gtlUNpkj7kCKiNhs0OhYob_C1qhHT2f_pHKODX1eQJ7HC4OsIYdMCYJ/exec";
@@ -896,7 +893,6 @@
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      // Button disable karo (double submission rokne ke liye)
       submitBtn.disabled = true;
       submitBtn.textContent = '⏳ Booking your visit...';
 
@@ -910,15 +906,13 @@
       };
 
       try {
-        // Google Apps Script me POST request
         await fetch(SCRIPT_URL, {
           method: 'POST',
-          mode: 'no-cors',   // ⚠️ CORS bypass — zaroori hai
+          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
 
-        // no-cors me response read nahi hota, isliye assume success
         alert('✨ Thank you ' + formData.name + '! Our agent will call you within 30 minutes.');
         form.reset();
 
