@@ -885,10 +885,10 @@
     <p>© 2025 PrimeEstates Realty. All rights reserved. | RERA Registered</p>
   </footer>
 
-  <!-- ===== FORM SCRIPT (Google Sheets Ready) ===== -->
+  <!-- ===== FORM SCRIPT (Google Sheets Connected) ===== -->
   <script>
-    // ⚠️ YAHAN apna Google Apps Script Web App URL paste karein
-    const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+    // ✅ Aapka Google Apps Script Web App URL
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcK77Q6Kwq7gtlUNpkj7kCKiNhs0OhYob_C1qhHT2f_pHKODX1eQJ7HC4OsIYdMCYJ/exec";
 
     const form = document.getElementById('realEstateForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -896,6 +896,7 @@
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
+      // Button disable karo (double submission rokne ke liye)
       submitBtn.disabled = true;
       submitBtn.textContent = '⏳ Booking your visit...';
 
@@ -905,18 +906,19 @@
         email: document.getElementById('email').value.trim(),
         propertyType: document.getElementById('propertyType').value,
         budget: document.getElementById('budget').value,
-        location: document.getElementById('location').value.trim(),
-        timestamp: new Date().toLocaleString()
+        location: document.getElementById('location').value.trim()
       };
 
       try {
+        // Google Apps Script me POST request
         await fetch(SCRIPT_URL, {
           method: 'POST',
-          mode: 'no-cors',
+          mode: 'no-cors',   // ⚠️ CORS bypass — zaroori hai
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
 
+        // no-cors me response read nahi hota, isliye assume success
         alert('✨ Thank you ' + formData.name + '! Our agent will call you within 30 minutes.');
         form.reset();
 
